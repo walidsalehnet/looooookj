@@ -2,11 +2,12 @@ const express = require('express');
 const admin = require('firebase-admin');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config(); // لتحميل متغيرات .env
 
-// تحميل ملف Firebase
-const serviceAccount = require('./serviceAccountKey.json');  // تأكد من أن المسار صحيح إلى الملف
+// تحميل بيانات firebase من متغير البيئة
+const serviceAccount = JSON.parse(process.env.FIREBASE_CREDENTIALS);
 
-// تهيئة Firebase باستخدام الملف
+// تهيئة Firebase
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
